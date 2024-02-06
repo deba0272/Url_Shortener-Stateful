@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #495057;
+        }
+        h1 {
+            color: #007bff;
+            font-size: 48px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        p {
+            font-size: 18px;
+            color: #28a745;
+        }
+        nav {
+            background-color: #007bff;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #0056b3;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL SHORTENER</title>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Generate URL</a>
+        <a href="#">URL List</a>
+        <a href="#">About</a>
+    </nav>
+    <h1>URL SHORTENER</h1>
+    <% if (locals.id) { %>
+        <p>URL Generated: <span style="font-weight: bold;">http://localhost:8009/<%= id %></span></p>
+    <% } %>
+    <div>
+        <form method="POST" action="/url">
+            <label>Enter Your Original Url:</label>
+            <input type="text" name="url" placeholder="https://example.com"/>
+            <button type="submit">Generate</button>
+        </form>
+        <% if (locals.urls) { %>
+            <table>
+                <thead>
+                    <th>SL.NO</th>
+                    <th>ShortID</th>
+                    <th>Redirect</th>
+                    <th>Clicks</th>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url,index)=> { %>
+                        <tr>
+                            <td><%= index + 1 %> </td>
+                            <td><%= url.shortId %></td>
+                            <td><%= url.redirectUrl %> </td>
+                            <td><%= url.totalClicks.length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+    <footer>
+        &copy; 2024 URL SHORTENER. All rights reserved.
+    </footer>
+</body>
+</html>
