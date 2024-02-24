@@ -53,7 +53,7 @@ shortId
     },
 },
 });
-res.redirect(entry.redirectUrl);
+//res.redirect(entry.redirectUrl);
 });
 //app.get("/:shortId",async (req,res)=>{
 app.listen(port,()=>{//using arrow function
